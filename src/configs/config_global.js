@@ -17,8 +17,8 @@ const isDark = false; // const isDark = Appearance.getColorScheme() === 'dark';
 
 module.exports = {
     APP_NAME: 'Financial Data Mapper',
-    PRODUCTION_LINK: "https://localhost:3000/api",
-    DEV_LINK: "https://localhost:3000/api",
+    PRODUCTION_LINK: "https://financialdata.phat-ou.link",
+    DEV_LINK: "https://financialdata.phat-ou.link",
     FATHER_LINK: null,
 
     BAR_HEIGHT: barHeight,
@@ -32,20 +32,7 @@ module.exports = {
     DATA: {
         IS_NEW_SIGN_UP: false,
         LOGIN_SERVICE: null,
-        USER: {
-            firstName: 'Phat',
-            lastName: 'Pham',
-            imageURL: '',
-            email: '',
-            phone: '',
-            address: {
-                country: '',
-                state: '',
-                city: '',
-                zip: '',
-                useForBilling: false
-            }
-        },
+        USER: {},
         MY_PLEDGES: [],
         MY_GROUPS: [],
         USER_TOKEN: null

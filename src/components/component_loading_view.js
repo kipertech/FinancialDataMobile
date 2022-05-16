@@ -92,7 +92,7 @@ export class LoadingView extends PureComponent
                             autoPlay={true}
                         />
                         :
-                        <Spinner size={circleSize} type={'Pulse'} color={GLOBAL.COLOR.MAIN}/>
+                        <Spinner size={circleSize} type={'Pulse'} color={GLOBAL.COLOR.ENHANCED.UI_BLUE}/>
                 }
 
                 {/* Description */}

@@ -6,9 +6,12 @@ const GLOBAL = require('../configs/config_global');
 export function apiWrapper(link, method = 'POST', functionName = '', body = null, completeFunc = () => {}, customAuthorizationKey = null)
 {
     return new Promise((resolve, reject) => {
-        let hasPagination = link.toLowerCase().includes('page') || link.toLowerCase().includes('per_page');
+        let hasPagination = link.toLowerCase().includes('page') || link.toLowerCase().includes('per_page'),
+            fetchLink = (link.startsWith('http') ? '' : GLOBAL.FATHER_LINK) + link;
 
-        fetch((link.startsWith('http') ? '' : GLOBAL.FATHER_LINK) + link, {
+        console.log(fetchLink);
+
+        fetch(fetchLink, {
             method: method,
             headers: {
                 'Content-Type': 'application/json',

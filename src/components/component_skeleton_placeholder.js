@@ -46,7 +46,7 @@ var __importDefault = (this && this.__importDefault) || function (mod)
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __importStar(require("react"));
 const react_native_1 = require("react-native");
-const masked_view_1 = __importDefault(require("@react-native-masked-view/masked-view"));
+const masked_view_1 = __importDefault(require("react-native-text-input-mask"));
 const SCREEN_WIDTH = react_native_1.Dimensions.get("window").width;
 function SkeletonPlaceholder({ children, backgroundColor = "#E1E9EE", speed = 800, highlightColor = "#F2F8FC" })
 {
