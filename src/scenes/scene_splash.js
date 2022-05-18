@@ -255,7 +255,7 @@ export class SceneSplash extends Component
                     Toast.show({
                         type: 'error',
                         text1: 'No Internet Connection',
-                        text2: 'Cannot fetch data from Radius server'
+                        text2: 'Cannot fetch data from the server'
                     });
 
                     // Stay here

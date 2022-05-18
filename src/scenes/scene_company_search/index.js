@@ -13,13 +13,15 @@ import {
     FlatList,
     TouchableOpacity
 } from "react-native";
-import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 
-import { parsedTextStyle, showAppError } from "../utils";
-import { LoadingView, TextBox } from "../components";
-import { searchCompany } from "../apis";
+import { LoadingView, TextBox } from "../../components";
+import CompanyDetailSheet from "./component_company_detail_sheet";
 
-const GLOBAL = require('../configs/config_global');
+import { parsedTextStyle, showAppError } from "../../utils";
+
+import { searchCompany } from "../../apis";
+
+const GLOBAL = require('../../configs/config_global');
 
 export class SceneCompanySearch extends Component
 {
@@ -122,55 +124,38 @@ export class SceneCompanySearch extends Component
                     <FlatList
                         style={{ flex: 1 }}
                         data={this.state.companyList}
+                        keyExtractor={(item) => item['cikCode']?.toString()}
                         contentContainerStyle={{ paddingBottom: GLOBAL.BOTTOM_BAR_HEIGHT + 48 }}
                         ItemSeparatorComponent={() => <View style={{ alignSelf: 'stretch', marginHorizontal: 24, height: 1, backgroundColor: GLOBAL.COLOR.DIVIDER }}/>}
-                        renderItem={({ item, index }) => {
-                            return(
-                                <TouchableOpacity
-                                    onPress={() => this.infoSheet.snapToIndex(0)}
-                                    style={{ alignSelf: 'stretch', paddingHorizontal: 28, paddingVertical: 16 }}>
-                                    <Text style={parsedTextStyle({ fontWeight: 'bold', fontSize: 16 })}>
-                                        {item.name}
-                                    </Text>
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.companyDetailSheet.showSheet(item);
+                                    Keyboard.dismiss();
+                                }}
+                                style={{ alignSelf: 'stretch', paddingHorizontal: 28, paddingVertical: 16 }}>
+                                <Text style={parsedTextStyle({ fontWeight: 'bold', fontSize: 16 })}>
+                                    {item['name']}
+                                </Text>
 
-                                    <Text style={parsedTextStyle({ marginTop: 8, color: GLOBAL.COLOR.ENHANCED.UI_BLUE })}>
-                                        {item.ticker}
-                                    </Text>
+                                <Text style={parsedTextStyle({ marginTop: 8, color: GLOBAL.COLOR.ENHANCED.UI_BLUE })}>
+                                    {item['ticker']}
+                                </Text>
 
-                                    <Text style={parsedTextStyle({ marginTop: 8, letterSpacing: 1.2, color: GLOBAL.COLOR.TEXT_GRAY })}>
-                                        CIK: {item.cikCode}
-                                    </Text>
-                                </TouchableOpacity>
-                            );
-                        }}
+                                <Text style={parsedTextStyle({ marginTop: 8, letterSpacing: 1.2, color: GLOBAL.COLOR.TEXT_GRAY })}>
+                                    CIK: {item['cikCode']}
+                                </Text>
+                            </TouchableOpacity>
+                        )}
                     />
 
                     {/* Top Gradient */}
                     <Image
-                        source={require('../images/image_gradient_down.png')}
+                        source={require('../../images/image_gradient_down.png')}
                         style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 20 }}
                     />
                 </View>
             </View>
-        );
-    }
-    // endregion
-
-    // region Render Company Info Sheet
-    renderCompanyInfoSheet()
-    {
-        return(
-            <BottomSheet
-                ref={(comp) => this.infoSheet = comp}
-                index={-1}
-                enablePanDownToClose={true}
-                backdropComponent={BottomSheetBackdrop}
-                snapPoints={['75%']}
-                onChange={(index) => this.setState({ currentSheetIndex: index })}>
-                <View style={{ flex: 1, padding: 24 }}>
-                    <Text>Awesome 🎉</Text>
-                </View>
-            </BottomSheet>
         );
     }
     // endregion
@@ -217,7 +202,7 @@ export class SceneCompanySearch extends Component
                 }
 
                 {/* Info Sheet */}
-                {this.renderCompanyInfoSheet()}
+                <CompanyDetailSheet ref={(comp) => this.companyDetailSheet = comp} />
             </View>
         );
     }
