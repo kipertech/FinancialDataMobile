@@ -182,6 +182,9 @@ class App extends Component
                     this.setState({ windowHeight, windowWidth }, () => this.startAllConfigs());
                 }}
                 style={{ flex: 1, width: '100%', backgroundColor: GLOBAL.COLOR.MAIN }}>
+                {/* Status Bar Config */}
+                <StatusBar barStyle={'dark-content'} />
+
                 {/* Screen Stack */}
                 {CreateRouterStack()}
 

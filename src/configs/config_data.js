@@ -1,31 +1,49 @@
 module.exports = {
     TAG_MAP: {
-        "Non-interest Income": "NoninterestIncome",
+        "NoninterestIncome": "Non-interest Income",
         "Revenues": "Revenues",
-        "Expenses": "CostsAndExpenses",
-        "Extraordinary Items": "UnusualOrInfrequentItemNetGainLoss",
-        "Discontinued Operations": "DiscontinuedOperationIncomeLossFromDiscontinuedOperationBeforeIncomeTax",
-
-        "Net Income": "", // = Revenues - Expenses - Interests - Taxes
-        "EBIT": "", // Earnings Before Interests and Taxes = Revenues - Cost of Goods Sold - Operating Expenses
-        "EBT": "", // Earnings Before Taxes = Net Income + Taxes
-        "Net Income Before Ext. Items": "", // = Net Income + Extraordinary Items
-        "Ext. Items & Disc. Ops.": "", // = Extraordinary Items + Discontinued Operations
-
-        "Sales (Net)": "SalesRevenueNet",
-        "Cost of Goods Sold": "CostOfGoodsAndServicesSold",
-        "Operating Expenses": "OperatingExpenses",
-        "Gross Profit": "GrossProfit",
-        "R&D Expense": "ResearchAndDevelopmentExpense",
-        "SG&A Expense": "PaymentsOfDepartmentOfJusticeAndSecuritiesAndExchangeCommissionSettlementAndIndemnity",
-        "EBITDA": "EarningBeforeInterestTaxesDepreciationAndAmortization",
-        "Depreciation & Amortization": "DepreciationAndAmortization",
-        "Net Interest Expense": "NetInterestExpense",
-        "Non-Operating Income (Loss)": "IncomeLossFromContinuingOperationsNonoperatingIncomeLossBeforeIncomeTaxes",
-        "Income Taxes": "IncomeTaxes",
-        "Other Income (Loss)": "NetIncomeLoss",
-        "Minority Interest in Earnings": "Minorityinterestinearningsofsubsidiary",
-        "Preferred Dividends": "PreferredDividendsDeclared",
-        "Net Income (available to common)": "NetIncomeAvailableToCommonStockholders"
+        "CostsAndExpenses": "Expenses",
+        "UnusualOrInfrequentItemNetGainLoss": "Extraordinary Items",
+        "DiscontinuedOperationIncomeLossFromDiscontinuedOperationBeforeIncomeTax": "Discontinued Operations",
+        "SalesRevenueNet": "Sales (Net)",
+        "CostOfGoodsAndServicesSold": "Cost of Goods Sold",
+        "OperatingExpenses": "Operating Expenses",
+        "GrossProfit": "Gross Profit",
+        "ResearchAndDevelopmentExpense": "R&D Expense",
+        "PaymentsOfDepartmentOfJusticeAndSecuritiesAndExchangeCommissionSettlementAndIndemnity": "SG&A Expense",
+        "EarningBeforeInterestTaxesDepreciationAndAmortization": "EBITDA",
+        "DepreciationAndAmortization": "Depreciation & Amortization",
+        "NetInterestExpense": "Net Interest Expense",
+        "IncomeLossFromContinuingOperationsNonoperatingIncomeLossBeforeIncomeTaxes": "Non-Operating Income (Loss)",
+        "IncomeTaxes": "Income Taxes",
+        "NetIncomeLoss": "Other Income (Loss)",
+        "Minorityinterestinearningsofsubsidiary": "Minority Interest in Earnings",
+        "PreferredDividendsDeclared": "Preferred Dividends",
+        "NetIncomeAvailableToCommonStockholders": "Net Income (available to common)"
+    },
+    CALCULATED_FIELDS: {
+        "Net Income": {
+            "Revenues": 1,
+            "CostsAndExpenses": -1,
+            "NetInterestExpense": -1,
+            "IncomeTaxes": -1
+        }, // = Revenues - Expenses - Interests - Taxes
+        "EBIT": {
+            "Revenues": 1,
+            "CostOfGoodsAndServicesSold": -1,
+            "OperatingExpenses": -1
+        }, // Earnings Before Interests and Taxes = Revenues - Cost of Goods Sold - Operating Expenses
+        "EBT": {
+            "NoninterestIncome": 1,
+            "IncomeTaxes": 1
+        }, // Earnings Before Taxes = Net Income + Taxes
+        "Net Income Before Ext. Items": {
+            "NoninterestIncome": 1,
+            "UnusualOrInfrequentItemNetGainLoss": 1
+        }, // = Net Income + Extraordinary Items
+        "Ext. Items & Disc. Ops.": {
+            "UnusualOrInfrequentItemNetGainLoss": 1,
+            "DiscontinuedOperationIncomeLossFromDiscontinuedOperationBeforeIncomeTax": 1
+        } // = Extraordinary Items + Discontinued Operations
     }
 };

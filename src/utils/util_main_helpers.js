@@ -39,11 +39,18 @@ export function showAppError(text, callback = () => {})
 // endregion
 
 // region Number with Commas and Summary
-export function numberWithCommas(x, summary = true, fixedDecimal = 0)
+export function numberWithCommas(x, summary = true, fixedDecimal = 0, addDollarSign = false)
 {
     let decimalStr = Number(x || 0).toFixed(fixedDecimal),
         processingNumber = summary ? Math.round(x) : (fixedDecimal > 0 ? Number(decimalStr.substring(0, decimalStr.length - (fixedDecimal + 1))) : x),
-        postDecimal = fixedDecimal > 0 ? decimalStr.substr(decimalStr.toString().length - 3, fixedDecimal + 1) : '';
+        postDecimal = fixedDecimal > 0 ? decimalStr.substr(decimalStr.toString().length - 3, fixedDecimal + 1) : '',
+        isNegative = false;
+
+    if (processingNumber < 0)
+    {
+        isNegative = true;
+        processingNumber = Math.abs(processingNumber);
+    }
 
     let postfix = '';
     if (summary)
@@ -69,7 +76,12 @@ export function numberWithCommas(x, summary = true, fixedDecimal = 0)
         postfix = postDecimal;
     }
 
-    return processingNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + postfix;
+    return(
+        (isNegative ? '-' : '') +
+        (addDollarSign ? '$' : '') +
+        processingNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
+        postfix
+    );
 }
 // endregion
 

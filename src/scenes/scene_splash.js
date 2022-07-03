@@ -262,7 +262,7 @@ export class SceneSplash extends Component
                     this.setState({ isLoading: false });
                 }
             });
-        }, 2000);
+        }, 0);
     }
     // endregion
 

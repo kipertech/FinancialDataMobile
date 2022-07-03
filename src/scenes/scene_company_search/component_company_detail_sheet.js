@@ -109,7 +109,7 @@ export default class CompanyDetailSheet extends PureComponent
                         textStyle={{ fontWeight: 'bold' }}
                         onPress={() => {
                             this.closeSheet();
-                            setTimeout(() => RootNavigation.navigate(ROUTES.TAG_DATA, { companyData }), 500);
+                            setTimeout(() => RootNavigation.navigate(ROUTES.TAG_DATA, { companyData }), 250);
                         }}
                     />
                 </View>
